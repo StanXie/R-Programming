@@ -1,26 +1,35 @@
 makeCacheMatrix <- function(x = matrix()) {
-  m<-NULL
+  cache<-NULL
+  
+  ##store a matrix
   set<-function(y){
     x<<-y
-    m<<-NUL
+    cache<<-NUL
   }
+  
+  ##return to the stored matrix
   get<-function() x
-  setmaen<-function(mean) m<<-mean
-  getmean<-function() m
+  
+  
+  cacheInverse<-function(co) m<<-co
+  getInverse<-function() m
+  
+  ##return to list
   list(set=set,
        get=get,
-       setmean=setmean
-       getmean=getmean)
+       cacheInverse=cacheInverse,
+       getInverse=getInverse)
 }
 
-cachemean<-function(x,...){
-  m<-x$getmean()
+cacheSolve<-function(x,...){
+  ##get the cached value
+  m<-x$getInverse()
   if(!is.null(m)){
     message("getting cached data")
     return(m)
   }
   data<-x$get()
-  m<-mean(data,...)
-  x$setmean(m)
+  m<-co(data,...)
+  x$cacheInverse(m)
   m
 }
